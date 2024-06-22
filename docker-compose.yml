@@ -21,6 +21,7 @@ services:
     image: php:8.3-fpm
     volumes:
       - ./php:/php
+      - ./static_html:/static
 
   node:
     image: node:20-alpine
