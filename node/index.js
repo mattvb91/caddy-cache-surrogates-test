@@ -1,26 +1,27 @@
 const http = require('http');
+const fs = require('fs');
 
 // Define the port we want to listen on
 const PORT = 3000;
 
 // Create the HTTP server
 const server = http.createServer((req, res) => {
+
+    const file = req.url.replace('/node/', '');
+    const key = file.replace('.html', '');
+
     // Set response headers
     res.writeHead(200, {
         'Content-Type': 'text/html',
-        'X-Custom-Header': 'CustomHeaderValue'
+        'Surrogate-Key': 'node-' + key + ', ' + key
     });
 
     // HTML response
-    const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <body>Node response</body>
-    </html>
-  `;
+    fs.readFile('/static/' + file, (err, data) => {
+        // Send the response
+        res.end(data);
+    })
 
-    // Send the response
-    res.end(htmlContent);
 });
 
 // Make the server listen on port 80

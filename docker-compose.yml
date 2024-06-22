@@ -24,6 +24,8 @@ services:
 
   node:
     image: node:20-alpine
+    restart: always
     volumes:
       - ./node:/node
+      - ./static_html:/static
     command: node /node/index.js
