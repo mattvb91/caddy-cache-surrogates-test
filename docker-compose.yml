@@ -21,3 +21,9 @@ services:
     image: php:8.3-fpm
     volumes:
       - ./php:/php
+
+  node:
+    image: node:20-alpine
+    volumes:
+      - ./node:/node
+    command: node /node/index.js
