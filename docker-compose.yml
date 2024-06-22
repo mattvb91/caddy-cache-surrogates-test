@@ -1,0 +1,23 @@
+
+services:
+
+  caddy:
+    build:
+      context: ./docker/caddy
+    restart: unless-stopped
+    container_name: caddy
+    command: [ "caddy", "run", "--resume" ]
+    ports:
+      - 80:80
+      - 2019:2019
+    depends_on:
+      - php-fpm
+    volumes:
+      - ./docker/caddy/caddy_data:/data
+      - ./docker/caddy/caddy_config:/config
+      - ./static_html:/static
+
+  php-fpm:
+    image: php:8.3-fpm
+    volumes:
+      - ./php:/php
