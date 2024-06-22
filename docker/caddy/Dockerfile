@@ -1,7 +1,7 @@
 # 1. Stage: Build
 FROM caddy:2.8.4-builder-alpine as builder
 
-RUN xcaddy build --with github.com/darkweak/souin/plugins/caddy@6b127c4d35b78d5a653389907b97d37b656dda14
+RUN xcaddy build --with github.com/caddyserver/cache-handler
 
 # 2. Stage: Runtime
 FROM alpine
